@@ -2,6 +2,8 @@
 
 Initally, the script would only search through joined Teams. This caused a problem for clients that did not utilize Teams but only utilized Sharepoint Team Sites. Updated the script so that it would search through ALL Sharepoint sites including joined Teams. In effect, the script runs a bit slower, but should still produce the same results.
 
+Credit for initial script goes to Kevin Tegelaar and his blog [Cyberdrain](https://www.cyberdrain.com)
+
 # AzTeamsautomapper
 
 This script was made as an instant Teams/Sharepoint Onedrive sync mapping tool. The tool is based on my (fairly outdated) blog from 3 years ago that you can find [here](https://www.cyberdrain.com/automatically-mapping-sharepoint-sites-in-the-onedrive-for-business-client/)
