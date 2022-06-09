@@ -21,16 +21,15 @@ $Sites = (Invoke-RestMethod -Uri $AllSitesURI -Headers $Headers -Method GET -Con
 $MemberOf = foreach ($Site in $Sites) {
     $SiteWebID = $Site.id -split ','
     $SiteDrivesUri = "https://graph.microsoft.com/v1.0/sites/$($SiteWebID[1])/lists"
-    $SitesDrivesReq = (Invoke-RestMethod -Uri $SiteDrivesUri -Headers $Headers -Method GET -ContentType "application/json").value | where-object { $_.Name -eq "Shared Documents" }
+    $SiteDrivesReq = (Invoke-RestMethod -Uri $SiteDrivesUri -Headers $Headers -Method GET -ContentType "application/json").value | where-object { $_.Name -eq "Shared Documents" }
     if ($Site.description -like "*no-auto-map*") { continue }
-    if ($null -eq [System.Web.HttpUtility]::UrlEncode($SitesDrivesReq.id)) { continue }
     [pscustomobject] @{
         SiteID    = [System.Web.HttpUtility]::UrlEncode("{$($SiteWebID[1])}")
         WebID     = [System.Web.HttpUtility]::UrlEncode("{$($SiteWebID[2])}")
-        ListID    = [System.Web.HttpUtility]::UrlEncode("{$($SitesDrivesReq.id)}")
+        ListID    = [System.Web.HttpUtility]::UrlEncode("{$($SiteDrivesReq.id)}")
         WebURL    = [System.Web.HttpUtility]::UrlEncode($Site.webUrl)
         WebTitle  = [System.Web.HttpUtility]::UrlEncode($($Site.Name)).Replace("+", "%20")
-        ListTitle = [System.Web.HttpUtility]::UrlEncode($SitesDrivesReq.name)
+        ListTitle = [System.Web.HttpUtility]::UrlEncode($SiteDrivesReq.name)
     }
  
 }
